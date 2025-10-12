@@ -55,3 +55,10 @@ class UserChoice(models.Model):
     user = models.ForeignKey(PUser, on_delete=models.CASCADE);
     choice = models.ForeignKey(Choice, on_delete=models.CASCADE);
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    
+    def delete(self, *args, **kwargs):
+        super().delete(*args, **kwargs)
+        for ch in self.choice.all():
+            ch.votes = UserChoice.objects.filter(choice=ch.pk).count();
+            print(ch)
+            # ch.votes -= 1;

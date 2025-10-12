@@ -9,7 +9,7 @@
     <h2>Опросы:</h2>
     <div class="main_qustion-holder">
         {% for question in latest_question_list %}
-        <a class="main_question" href="{% url 'polls:detail' question.id %}">
+        <a class="question" href="{% url 'polls:detail' question.id %}">
             <h3>{{question.question_header}}</h3>
             {% if question.image %}
             <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">

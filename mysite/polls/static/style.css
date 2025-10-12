@@ -86,7 +86,7 @@ aside {
     text-decoration: none;
     font-style: normal;
 }
-.content > .main_qustion-holder > .main_question {
+.question {
     display: flex;
     flex-direction: column;
     border: 2px solid rgb(95, 94, 94);

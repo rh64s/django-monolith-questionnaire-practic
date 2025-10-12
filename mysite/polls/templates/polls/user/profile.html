@@ -17,11 +17,16 @@
         <br>
         {% if questions %}
             <p>Ваши опросы</p>
-            <div class="question">
-                <p>{{ question.question_text }}</p>
-                <p>Опубликовано: {{ question.pub_date }}</p>
-                <p class="text-rigth font-italic">{{ comment.created_at }}</p>
-            </div>
+            
+            {% for question in questions %}
+                <a class="question" href="{% url 'polls:detail' question.id %}">
+                    <h3>{{question.question_header}}</h3>
+                    {% if question.image %}
+                    <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
+                    {% endif %}
+                    <p>{{question.question_text}}</p>
+                </a> 
+            {% endfor %}
         {% else %}
             <p>Вы еще не создали ни одного вопроса</p>
         {% endif %}

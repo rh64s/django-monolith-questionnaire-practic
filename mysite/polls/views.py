@@ -49,18 +49,30 @@ def vote(request, question_id):
             'question': question,
             'error_message': 'вы не сделали выбор'
         });
-    # else:
     try:
         user_choice = UserChoice.objects.get(question=question_id, user=request.user.pk);
-        user_choice.choice = selected_choice; user_choice.save();
+        choices = [user_choice.choice.pk, selected_choice.pk]
+        user_choice.choice = selected_choice; 
+        user_choice.save();
+        
+        choice = Choice.objects.get(pk=choices[0]);
+        choice.votes -= 1
+        choice.save();
+        
+        choice = Choice.objects.get(pk=choices[1]);
+        choice.votes += 1
+        choice.save();
     # if get more than one answer (debug)
-    except MultipleObjectsReturned:
-        UserChoice.objects.filter(question=question_id, user=request.user.pk).delete();
     except ObjectDoesNotExist:
         UserChoice(user=request.user, choice=selected_choice, question=Question.objects.get(pk=question_id)).save();
-    for choices in Choice.objects.filter(question_id=question_id):
-        choices.votes = UserChoice.objects.filter(choice=choices).count();
-        choices.save();
+        user_choice = UserChoice.objects.get(user=request.user, choice=selected_choice, question=Question.objects.get(pk=question_id))
+        choice = Choice.objects.get(pk=user_choice.choice.pk);
+        choice.votes += 1;
+        choice.save();
+    # UserChoice.objects.all().delete();
+    # for choices in Choice.objects.filter(question_id=question_id):
+    #     choices.votes = UserChoice.objects.filter(choice=choices).count();
+    #     choices.save();
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)));
 
 @login_required(login_url="polls:login")
@@ -88,9 +100,9 @@ class PLoginView(LoginView):
 
 @login_required(login_url="polls:login")
 def p_profile(request):
-    # questions = Question.objects.filter(author=request.user.pk);
-    # context = {"questions": questions};
-    return render(request, "polls/user/profile.html");
+    questions = Question.objects.filter(author=request.user.pk);
+    context = {"questions": questions};
+    return render(request, "polls/user/profile.html", context);
 
 @login_required(login_url="polls:login")
 def p_profile_change(request):
