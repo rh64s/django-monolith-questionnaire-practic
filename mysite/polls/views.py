@@ -6,6 +6,8 @@ from django.urls import reverse, reverse_lazy;
 from django.views import generic;
 from django.views.generic import UpdateView, CreateView, DeleteView;
 
+from django.core.exceptions import MultipleObjectsReturned, ObjectDoesNotExist
+
 from django.contrib.auth.views import LoginView, PasswordChangeView
 from django.contrib.auth import logout, authenticate, login;
 from django.contrib.auth.decorators import login_required;
@@ -47,16 +49,19 @@ def vote(request, question_id):
             'question': question,
             'error_message': 'вы не сделали выбор'
         });
-    else:
+    # else:
+    try:
         user_choice = UserChoice.objects.get(question=question_id, user=request.user.pk);
-        #если пользователь уже отвечал на этот вопрос
-        if user_choice is not None:
-            user_choice.choice = selected_choice;
-        else:
-            UserChoice(user=request.user, choice=selected_choice, question=Question.objects.get(pk=question_id)).save();
-        selected_choice.votes = UserChoice.objects.filter(choice=selected_choice.pk).count();
-        selected_choice.save();
-        return HttpResponseRedirect(reverse('polls:results', args=(question.id,)));
+        user_choice.choice = selected_choice; user_choice.save();
+    # if get more than one answer (debug)
+    except MultipleObjectsReturned:
+        UserChoice.objects.filter(question=question_id, user=request.user.pk).delete();
+    except ObjectDoesNotExist:
+        UserChoice(user=request.user, choice=selected_choice, question=Question.objects.get(pk=question_id)).save();
+    for choices in Choice.objects.filter(question_id=question_id):
+        choices.votes = UserChoice.objects.filter(choice=choices).count();
+        choices.save();
+    return HttpResponseRedirect(reverse('polls:results', args=(question.id,)));
 
 @login_required(login_url="polls:login")
 def question_create(request):

@@ -1,5 +1,6 @@
 {% extends "layout/basic.html" %}
-{% comment %} {% load static %} {% endcomment %}
+{% load thumbnail %}
+
 {% block title %} Профиль пользователя {% endblock %}
 
 {% block content %}
@@ -10,6 +11,9 @@
         {% for question in latest_question_list %}
         <a class="main_question" href="{% url 'polls:detail' question.id %}">
             <h3>{{question.question_header}}</h3>
+            {% if question.image %}
+            <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
+            {% endif %}
             <p>{{question.question_text}}</p>
         </a> 
         {% endfor %}

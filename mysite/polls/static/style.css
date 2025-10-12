@@ -97,7 +97,12 @@ aside {
 
     transition: border-color var(--animation-speed-1);
 }
-
+.content > .main_qustion-holder > .main_question > img {
+    height: 300px;
+}
+.question-img {
+    border-radius: 15px;
+}
 .content > .main_qustion-holder > .main_question:hover {
     cursor: pointer;
     border-color: rgb(197, 197, 197);
