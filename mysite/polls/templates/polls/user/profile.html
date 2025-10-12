@@ -1,0 +1,47 @@
+{% extends "layout/basic.html" %}
+{% load thumbnail %}
+{% load static %}
+{% block title %} Профиль пользователя {% endblock %}
+{% block content %}
+<div class="split-box profile">
+    <div>
+        <h2>Профиль пользователя {{ user.username }}</h2>
+        {% if user.first_name and user.last_name %}
+            <p>Здравствуйте, {{ user.first_name }} {{ user.last_name }} </p>
+        {% else %}
+            <p>Здравствуйте!</p>
+        {% endif %}
+        <h3>Аватар</h3>
+        <img src="{% thumbnail user.image 'scale-1' %}">
+        <p>Вы можете изменить аватар в "Управление профилем"->"Изменить данные пользователя"</p>
+        <br>
+        {% if questions %}
+            <p>Ваши опросы</p>
+            <div class="question">
+                <p>{{ question.question_text }}</p>
+                <p>Опубликовано: {{ question.pub_date }}</p>
+                <p class="text-rigth font-italic">{{ comment.created_at }}</p>
+            </div>
+        {% else %}
+            <p>Вы еще не создали ни одного вопроса</p>
+        {% endif %}
+        <a class="a-button" href="{% url 'polls:question_create' %}">Создать вопрос</a>
+    </div>
+    <div>
+        <h2>Управление профилем</h2>
+        <a class="a-link" href="{% url 'polls:profile_change' %}">Изменить данные пользователя</a>
+        <a class="a-link" href="{% url 'polls:password_change' %}">Изменить пароль</a>
+        <a class="a-link" href="{% url 'polls:profile_delete' %}">Удалить профиль</a>
+    </div>
+    <div class="main_qustion-holder">
+        {% for question in latest_question_list %}
+        <a class="main_question" href="{% url 'polls:detail' question.id %}">
+            <h3>{{question.question_header}}</h3>
+            <p>{{question.question_text}}</p>
+        </a> 
+        {% endfor %}
+    </div>
+</div>
+
+    {% comment %} здесь из проекта докинуть вывод вопросов пользователя {% endcomment %}
+{% endblock %}

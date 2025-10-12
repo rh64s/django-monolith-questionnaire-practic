@@ -1,0 +1,25 @@
+{% extends "layout/basic.html" %}
+{% comment %} {% load static %} {% endcomment %}
+{% block title %} Профиль пользователя {% endblock %}
+
+{% block content %}
+
+{% if latest_question_list %}
+    <h2>Опросы:</h2>
+    <div class="main_qustion-holder">
+        {% for question in latest_question_list %}
+        <a class="main_question" href="{% url 'polls:detail' question.id %}">
+            <h3>{{question.question_header}}</h3>
+            <p>{{question.question_text}}</p>
+        </a> 
+        {% endfor %}
+    </div>
+    
+{% else %}
+    <p>
+        Нет опросов!
+    </p>
+
+{% endif %}
+
+{% endblock %}

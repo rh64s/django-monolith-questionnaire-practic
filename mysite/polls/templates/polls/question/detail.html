@@ -1,0 +1,26 @@
+{% extends "layout/basic.html" %}
+{% comment %} {% load thumbnail %} {% endcomment %}
+{% comment %} {% load static %} {% endcomment %}
+
+{% block title %} Профиль пользователя {% endblock %}
+{% block content %}
+
+<form action="{% url 'polls:vote' question.id %}" method="post">
+    {% csrf_token %}
+    <fieldset>
+        <legend>
+            <h1>{{question.question_header}}</h1>
+            <br>
+            <h2>{{question.question_text}}</h2>
+            <br>
+        </legend>
+        {% if error_message %}<p><strong> {{error_message}}</strong></p>{% endif %}
+        {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{forloop.counter}}" value="{{choice.id}}">
+        <label for="choice{{forloop.counter}}">{{choice.choice_text}}</label><br>
+        {% endfor %}
+    </fieldset>
+<button class="a-button" type="submit" name="submit">Проголосовать</button>
+
+</form>
+{% endblock %}

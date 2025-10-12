@@ -1,0 +1,9 @@
+{% extends "layout/basic.html" %}
+{% comment %} {% load bootstrap4 %} {% endcomment %}
+{% block title %} Регистрация {% endblock %}
+{% block content %}
+    <h2>Регистрация завершена!</h2>
+    <p>Теперь вы можете перейти в свой профиль, чтобы создать там свои опросы, либо вернуться на главную, чтобы голосовать за ответы</p>
+    <a class="a-button" href="{% url 'polls:index' %}">На главную</a>
+    <a class="a-button" href="{% url 'polls:profile' %}">В профиль</a>
+{% endblock %}

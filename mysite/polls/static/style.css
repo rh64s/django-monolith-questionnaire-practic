@@ -1,0 +1,202 @@
+* {
+    border: none;
+    padding: 0;
+    margin: 0;
+    box-sizing: content-box;
+    font-size: 12pt;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+:root {
+    --content-margin: 40px;
+    --animation-speed-1: 400ms;
+    --animation-speed-2: 250ms;
+
+}
+html {
+    font-size: 10px;
+}
+body {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    min-height: 100vh;
+}
+header {
+    display: flex;
+    height: fit-content;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 20px var(--content-margin);
+    border-bottom: 2px solid rgb(196, 196, 196);
+    font-size: 14pt;
+}
+#main {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    gap: 10px;
+    margin: 40px var(--content-margin);
+
+}
+footer {
+    background-color: rgb(80, 80, 80);
+    color: white;
+    padding: 40px var(--content-margin);
+    margin-top:auto;
+    
+}
+#header_urls {
+    display: flex;
+    flex-direction: row;
+    gap: 10px;
+}
+h1 {
+    font-size: 16pt;
+    font-weight: normal;
+}
+h2 {
+    font-size: 14pt;
+    font-weight: normal;
+}
+a {
+    text-decoration: underline;
+    font-style: normal;
+    color: black;
+}
+header > div > a {
+    text-decoration: none;
+}
+aside {
+    display: flex;
+    flex-direction: column;
+    gap:5px;
+    padding-right: 10px;
+    border-right: 2px solid gray;
+}
+.content {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+.content > .main_qustion-holder {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+} 
+.content > .main_qustion-holder > a {
+    text-decoration: none;
+    font-style: normal;
+}
+.content > .main_qustion-holder > .main_question {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid rgb(95, 94, 94);
+    border-radius: 20px;
+    width: max-content;
+    height: max-content;
+    padding: 15px 35px;
+
+    transition: border-color var(--animation-speed-1);
+}
+
+.content > .main_qustion-holder > .main_question:hover {
+    cursor: pointer;
+    border-color: rgb(197, 197, 197);
+    color: black;
+}
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    max-width: 50%;
+    min-width: 400px;
+}
+form > div {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+.helptext {
+    color: gray;
+}
+input {
+    border: 1px solid rgb(112, 112, 112);
+    border-radius: 15px;
+    padding: 10px 20px;
+    color: black;
+}
+input:focus {
+    border: 1px solid black;
+}
+input[type="submit"], .a-button {
+    display: block;
+    padding: 15px 40px;
+    background-color: rgb(80, 80, 80);
+    width: max-content;
+    border: none;
+    color: white;
+    font-weight: bold;
+    border-radius: 20px;
+    transition: background-color var(--animation-speed-2);
+}
+.a-button {
+    text-decoration: none;
+}
+
+input[type="submit"]:hover, .a-button:hover {
+    background-color: rgb(210, 209, 230);
+    color: black;
+    cursor: pointer;
+}
+
+.a-link {
+    color:black;
+    /* text-decoration: underline; */
+    transition: background-color var(--animation-speed-1);
+    border-radius: 10px;
+    padding: 2.5px 5px;
+}
+.a-link:hover {
+    background-color: lightgray;
+}
+
+.messages, .errorlist > li {
+    border: none;
+    border-left: 2px solid gray;
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+.errorlist {
+    list-style: none;
+}
+.errorlist > li {
+    list-style: none;
+
+}
+.messages > p {
+    font-weight: bold;
+}
+.split-box {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 50px;
+    justify-content: space-between;
+}
+.split-box > div {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+.profile > div > img {
+    max-width: 20vw;
+    min-width: 250px;
+    border-radius: 100%;
+}
+.profile > div:nth-child(1) {
+    max-width: 35vw;
+}
+@media (max-width: 900px) {
+    .profile > div:nth-child(1) {
+        max-width: none;
+    }
+}

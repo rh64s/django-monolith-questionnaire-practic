@@ -1,0 +1,28 @@
+{% extends "layout/basic.html" %}
+{% load bootstrap4 %}
+{% block title %} Создание опроса {% endblock %}
+{% block content %}
+    <h2>Создать опрос</h2>
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form }}
+        <br>
+        <h3>Варианты ответа:</h3>
+        {{ formset.management_form }}
+        {% for choice in formset %}
+            <div>
+                {{ choice.id }}
+                {{ choice.as_p }}
+                <div class="form-delete">
+                    {{form.DELETE_label_tag}}
+                    {{form.DELETE}}
+                </div>
+            </div>
+        {% endfor %}
+        <button type="submit">Создать опрос</button>
+        {% comment %} {% csrf_token %}
+        {% bootstrap_form form layout='horizontal' %}
+        {% bootstrap_formset formset layout='horizontal' %}
+        {% buttons submit='Добавить' %} {% endbuttons %} {% endcomment %}
+    </form>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "layout/basic.html" %}
+{% comment %} {% load static %} {% endcomment %}
+{% block title %} Профиль пользователя {% endblock %}
+{% block content %}
+
+<h1>{{ question.question_text }}</h1>
+<ul>
+    {% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} &#8212 {{ choice.votes }} vote{{choice.votes|pluralize}}</li>
+    {% endfor %}
+</ul>
+<a class="a-button" href="{% url 'polls:detail'  question.id %}">выбрать еще раз?*</a>
+<p class='helptext'>* Это перезапишет ваш ответ</p>
+
+{% endblock %}
