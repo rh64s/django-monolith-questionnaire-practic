@@ -68,4 +68,4 @@ class FormQuestion(forms.ModelForm):
         fields = ('author', 'question_header', 'question_text', 'image', 'death_date');
         widgets = {'author': forms.HiddenInput};
 
-FormChoiceSet = inlineformset_factory(Question, Choice, fields=('choice_text',))
+FormChoiceSet = inlineformset_factory(Question, Choice, fields=('choice_text',), extra=4,)

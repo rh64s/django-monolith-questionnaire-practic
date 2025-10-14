@@ -70,9 +70,9 @@ def vote(request, question_id):
         choice.votes += 1;
         choice.save();
     # UserChoice.objects.all().delete();
-    # for choices in Choice.objects.filter(question_id=question_id):
-    #     choices.votes = UserChoice.objects.filter(choice=choices).count();
-    #     choices.save();
+    for choices in Choice.objects.filter(question_id=question_id):
+        choices.votes = UserChoice.objects.filter(choice=choices).count();
+        choices.save();
     return HttpResponseRedirect(reverse('polls:results', args=(question.id,)));
 
 @login_required(login_url="polls:login")

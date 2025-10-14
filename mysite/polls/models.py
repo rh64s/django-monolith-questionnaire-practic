@@ -57,8 +57,7 @@ class UserChoice(models.Model):
     question = models.ForeignKey(Question, on_delete=models.CASCADE)
     
     def delete(self, *args, **kwargs):
+        ch = UserChoice.objects.get(choice=self.choice).count();
+        ch.votes -= 1;
+        ch.save();
         super().delete(*args, **kwargs)
-        for ch in self.choice.all():
-            ch.votes = UserChoice.objects.filter(choice=ch.pk).count();
-            print(ch)
-            # ch.votes -= 1;
