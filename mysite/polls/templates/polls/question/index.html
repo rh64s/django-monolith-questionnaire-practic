@@ -7,15 +7,19 @@
 
 {% if latest_question_list %}
     <h2>Опросы:</h2>
-    <div class="main_qustion-holder">
+    <div class="qustion-holder">
         {% for question in latest_question_list %}
-        <a class="question" href="{% url 'polls:detail' question.id %}">
-            <h3>{{question.question_header}}</h3>
-            {% if question.image %}
-            <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
-            {% endif %}
-            <p>{{question.question_text}}</p>
-        </a> 
+        <div class="question">
+            <a class="question-in" href="{% url 'polls:detail' question.id %}">
+                <h3>{{question.question_header}}</h3>
+                {% if question.image %}
+                <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
+                {% endif %}
+                <p>{{question.question_text}}</p>
+            </a>
+            <a class="question-delete" href="www.wxample.com">снести</a>
+        </div>
+        
         {% endfor %}
     </div>
     

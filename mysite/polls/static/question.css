@@ -1,0 +1,33 @@
+.question-holder {
+    display: flex;
+    flex-direction: column;
+    gap:10px;
+} 
+.question {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-left: 5px;
+    padding-left: 15px;
+    border-left: 2px solid gray;
+}
+.question-in {
+    display: flex;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 2px solid gray;
+    padding: 10px;
+    gap: 5px;
+}
+.question-delete {
+    display: flex;
+    width: fit-content;
+    padding: 10px;
+    background-color: rgb(255, 255, 255);
+    border-radius: 10px;
+    border: 2px solid red;
+}
+.question-delete:hover {
+    
+    cursor: pointer;
+}

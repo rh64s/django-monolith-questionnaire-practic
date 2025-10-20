@@ -92,6 +92,21 @@ def question_create(request):
     context = {'form': form, 'formset':formset};
     return render(request, 'polls/question/create.html',context);
 
+@login_required(login_url="polls:login")
+def question_delete(request, question_id):
+    try:
+        Question.objects.get(author=request.user.pk, pk=question_id).delete();
+        messages.add_message(request, messages.SUCCESS, "Вопрос удален!");
+        return redirect('polls:profile')
+    except:
+        messages.add_message(request, messages.SUCCESS, "Вопрос не удалось удалить!");
+        
+        return redirect('polls:profile')
+
+    
+        
+
+
 # USER VIEWS
 
 class PLoginView(LoginView):

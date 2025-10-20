@@ -26,6 +26,7 @@ class Question(models.Model):
     death_date = models.DateField('date death');
     image = models.ImageField(blank=True, upload_to=get_timestamp_path, verbose_name='Изображение');
     author = models.ForeignKey(PUser, on_delete=models.CASCADE, verbose_name='Автор вопроса');
+    can_reanswer = models.BooleanField(verbose_name="Можно заново переголосовать")
     
     def was_published_recently(self):
         return self.pub_date >= timezone.now() - datetime.timedelta(days=1);

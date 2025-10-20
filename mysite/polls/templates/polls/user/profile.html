@@ -19,13 +19,16 @@
             <p>Ваши опросы</p>
             
             {% for question in questions %}
+            <div>
                 <a class="question" href="{% url 'polls:detail' question.id %}">
                     <h3>{{question.question_header}}</h3>
                     {% if question.image %}
                     <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
                     {% endif %}
                     <p>{{question.question_text}}</p>
-                </a> 
+                </a>
+            </div>
+                <a href="{% url 'polls:question_delete' question.id %}">Удалить?</a>
             {% endfor %}
         {% else %}
             <p>Вы еще не создали ни одного вопроса</p>
@@ -38,14 +41,7 @@
         <a class="a-link" href="{% url 'polls:password_change' %}">Изменить пароль</a>
         <a class="a-link" href="{% url 'polls:profile_delete' %}">Удалить профиль</a>
     </div>
-    <div class="main_qustion-holder">
-        {% for question in latest_question_list %}
-        <a class="main_question" href="{% url 'polls:detail' question.id %}">
-            <h3>{{question.question_header}}</h3>
-            <p>{{question.question_text}}</p>
-        </a> 
-        {% endfor %}
-    </div>
+
 </div>
 
     {% comment %} здесь из проекта докинуть вывод вопросов пользователя {% endcomment %}

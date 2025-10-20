@@ -1,3 +1,5 @@
+@import url("question.css");
+
 * {
     border: none;
     padding: 0;
@@ -77,37 +79,8 @@ aside {
     flex-direction: column;
     gap: 20px;
 }
-.content > .main_qustion-holder {
-    display: flex;
-    flex-direction: column;
-    gap:10px;
-} 
-.content > .main_qustion-holder > a {
-    text-decoration: none;
-    font-style: normal;
-}
-.question {
-    display: flex;
-    flex-direction: column;
-    border: 2px solid rgb(95, 94, 94);
-    border-radius: 20px;
-    width: max-content;
-    height: max-content;
-    padding: 15px 35px;
 
-    transition: border-color var(--animation-speed-1);
-}
-.content > .main_qustion-holder > .main_question > img {
-    height: 300px;
-}
-.question-img {
-    border-radius: 15px;
-}
-.content > .main_qustion-holder > .main_question:hover {
-    cursor: pointer;
-    border-color: rgb(197, 197, 197);
-    color: black;
-}
+
 form {
     display: flex;
     flex-direction: column;
