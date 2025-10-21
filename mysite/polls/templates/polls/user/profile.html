@@ -15,22 +15,22 @@
         <img src="{% thumbnail user.image 'scale_high' %}">
         <p>Вы можете изменить аватар в "Управление профилем"->"Изменить данные пользователя"</p>
         <br>
-        {% if questions %}
-            <p>Ваши опросы</p>
-            
-            {% for question in questions %}
-            <div>
-                <a class="question" href="{% url 'polls:detail' question.id %}">
+        <div class="qustion-holder">
+            {% for question in latest_question_list %}
+            <div class="question">
+                <a class="question-in" href="{% url 'polls:detail' question.id %}">
                     <h3>{{question.question_header}}</h3>
                     {% if question.image %}
                     <img class="question-img" src="{% thumbnail question.image 'scale_medium' %}">
                     {% endif %}
                     <p>{{question.question_text}}</p>
                 </a>
-            </div>
-                <a href="{% url 'polls:question_delete' question.id %}">Удалить?</a>
-            {% endfor %}
-        {% else %}
+                <a class="question-delete" href="www.example.com">Удалить</a>
+        </div>
+
+        {% endfor %}
+    </div>
+{% else %}
             <p>Вы еще не создали ни одного вопроса</p>
         {% endif %}
         <a class="a-button" href="{% url 'polls:question_create' %}">Создать вопрос</a>
