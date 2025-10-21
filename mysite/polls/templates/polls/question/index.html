@@ -17,17 +17,14 @@
                 {% endif %}
                 <p>{{question.question_text}}</p>
             </a>
-            <a class="question-delete" href="www.wxample.com">снести</a>
+            <a class="question-delete" href="www.example.com">Удалить</a>
         </div>
         
         {% endfor %}
     </div>
     
 {% else %}
-    <p>
-        Нет опросов!
-    </p>
-
+    <p>Нет опросов!</p>
 {% endif %}
 
 {% endblock %}
